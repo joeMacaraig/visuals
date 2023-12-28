@@ -1,9 +1,7 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <section>
-      <h1 className="text-4xl">Visuals</h1>
+    <section className="w-full h-[100vh] flex justify-center items-center">
+      <h1 className="">Content</h1>
     </section>
   );
 }
