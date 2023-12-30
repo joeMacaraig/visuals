@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import SearchBar from "./SearchBar";
 
 export default function Navbar() {
   return (
@@ -9,12 +10,20 @@ export default function Navbar() {
         <h1 className="text-2xl sm:text-3xl font-medium tracking-tight mb-2">
           <Link href="/">Visuals.</Link>
         </h1>
-        {/* change to Link after */}
         <div className="flex items-center gap-4">
-          <div className="font-medium uppercase hover:opacity-75">Home.</div>
-          <div className="font-medium uppercase hover:opacity-75">Images.</div>
-          <div className="font-medium uppercase hover:opacity-75">Videos.</div>
-          <div>"Search Bar ... "</div>
+          <Link href="/" className="font-medium uppercase hover:opacity-75">
+            Home.
+          </Link>
+          <Link
+            href="/results/curated"
+            className="font-medium uppercase hover:opacity-75"
+          >
+            Images.
+          </Link>
+          <Link href="/" className="font-medium uppercase hover:opacity-75">
+            Videos.
+          </Link>
+          <SearchBar />
         </div>
       </nav>
     </header>
