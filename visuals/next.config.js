@@ -8,6 +8,12 @@ const nextConfig = {
         port: "",
         pathname: "/photos/**",
       },
+      {
+        protocol: "https", 
+        hostname: "player.vimeo.com", 
+        port: "", 
+        pathname: "/external/**"
+      }
     ],
   },
 };

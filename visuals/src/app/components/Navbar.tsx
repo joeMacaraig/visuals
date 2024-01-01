@@ -15,12 +15,12 @@ export default function Navbar() {
             Home.
           </Link>
           <Link
-            href="/results/curated"
+            href="/photos/curated"
             className="font-medium uppercase hover:opacity-75"
           >
             Images.
           </Link>
-          <Link href="/" className="font-medium uppercase hover:opacity-75">
+          <Link href="/videos/curated" className="font-medium uppercase hover:opacity-75">
             Videos.
           </Link>
           <SearchBar />
