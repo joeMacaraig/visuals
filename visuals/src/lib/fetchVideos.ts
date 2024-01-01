@@ -1,21 +1,21 @@
-import type { ImagesRes } from "@/models/image";
-import { ImageWithPhotosSchema } from "@/models/image";
+import type { FilmRes } from "@/models/video";
+import { FilmWithVideosSchema } from "@/models/video";
 import { env } from "./env";
 
-export default async function fetchImages(
+export default async function fetchVideos(
   url: string
-): Promise<ImagesRes | undefined> {
+): Promise<FilmRes | undefined> {
   try {
     const response = await fetch(url, {
       headers: { Authorization: env.PEXELS_API_KEY },
     });
 
-    if (!response.ok) throw new Error("FETCH IMAGES ERROR!\n");
+    if (!response.ok) throw new Error("FETCH VIDEOS ERROR!\n");
 
-    const imagesRes: ImagesRes = await response.json();
+    const filmRes: FilmRes = await response.json();
 
     //parsing data with zod schema
-    const parsedData = ImageWithPhotosSchema.parse(imagesRes);
+    const parsedData = FilmWithVideosSchema.parse(filmRes);
     if (parsedData.total_results === 0) return undefined;
     console.log(parsedData);
     return parsedData;
