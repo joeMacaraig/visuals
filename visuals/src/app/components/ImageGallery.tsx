@@ -1,10 +1,10 @@
 import fetchImages from "@/lib/fetchImages";
 import type { ImagesRes } from "@/models/image";
-import React from "react";
 import ImageContainer from "./ImageContainer";
-import addBlurredDateUrls from "@/lib/getBase";
 import getPrev from "@/lib/getPrev";
 import Pagination from "./Pagination";
+import blurredImageURL from "@/lib/getBase";
+import SearchBar from "./SearchBar";
 
 type Props = {
   topic?: string | undefined;
@@ -24,7 +24,6 @@ export default async function ImageGallery({ topic = "curated", page }: Props) {
     url = `https://api.pexels.com/v1/search?query=${topic}&page=${page}`;
   }
   const images: ImagesRes | undefined = await fetchImages(url);
-
   if (!images || images.per_page === 0) {
     return (
       <h2 className="m-4 text-2xl font-bold flex justify-center items-center">
@@ -33,18 +32,29 @@ export default async function ImageGallery({ topic = "curated", page }: Props) {
     );
   }
 
-  const photosWithBlur = await addBlurredDateUrls(images);
+  const photosWithBlur = await blurredImageURL(images);
 
   const { prevPage, nextPage } = getPrev(images);
   const footerProps = { topic, page, nextPage, prevPage };
   return (
-    <>
-      <section className="px-1 my-3 grid grid-cols-gallery auto-rows-[10px]">
+    <div className="max-w-6xl mx-auto">
+      <div className="h-[25vh] flex items-center flex-col justify-center ">
+        <div className="text-4xl font-medium tracking-wide text-center">
+          <span>IMAGES.</span>
+          <span className="p-2 text-gray-300 font-light tracking-tighter">
+            ({images.total_results})
+          </span>
+        </div>
+        <div className="flex items-center justify-center mx-auto my-4 w-full">
+          <SearchBar />
+        </div>
+      </div>
+      <section className="px-1 my-3 grid grid-cols-gallery auto-rows-[10px] max-w-6xl mx-auto">
         {photosWithBlur?.map((photo) => (
           <ImageContainer key={photo.id} photo={photo} />
         ))}
       </section>
       <Pagination {...footerProps} />
-    </>
+    </div>
   );
 }
