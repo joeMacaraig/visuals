@@ -17,7 +17,6 @@ export default async function fetchVideos(
     //parsing data with zod schema
     const parsedData = FilmWithVideosSchema.parse(filmRes);
     if (parsedData.total_results === 0) return undefined;
-    console.log(parsedData);
     return parsedData;
   } catch (error) {
     if (error instanceof Error) console.log(error.stack);

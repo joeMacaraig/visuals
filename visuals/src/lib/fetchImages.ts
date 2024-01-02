@@ -17,7 +17,6 @@ export default async function fetchImages(
     //parsing data with zod schema
     const parsedData = ImageWithPhotosSchema.parse(imagesRes);
     if (parsedData.total_results === 0) return undefined;
-    console.log(parsedData);
     return parsedData;
   } catch (error) {
     if (error instanceof Error) console.log(error.stack);

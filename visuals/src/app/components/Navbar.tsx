@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import SearchBar from "./SearchBar";
 
 export default function Navbar() {
   return (
@@ -20,10 +19,12 @@ export default function Navbar() {
           >
             Images.
           </Link>
-          <Link href="/videos/curated" className="font-medium uppercase hover:opacity-75">
+          <Link
+            href="/videos/popular"
+            className="font-medium uppercase hover:opacity-75"
+          >
             Videos.
           </Link>
-          <SearchBar />
         </div>
       </nav>
     </header>

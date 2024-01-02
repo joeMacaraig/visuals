@@ -20,7 +20,7 @@ export default function ImageContainer({ photo }: Props) {
           target="_blank"
           className="grid place-content-center"
         >
-          <div className="rounded-xl overflow-hidden group shadow-md">
+          <div className="relative rounded overflow-hidden group shadow-xl border">
             <Image
               src={photo.src.large}
               alt={photo.alt}
@@ -31,6 +31,9 @@ export default function ImageContainer({ photo }: Props) {
               blurDataURL={photo.blurredDataUrl}
               className="group-hover:opacity-75"
             />
+            <div className="absolute right-0 bottom-0 p-2 text-white font-medium">
+              {photo.photographer}
+            </div>
           </div>
         </Link>
       </div>

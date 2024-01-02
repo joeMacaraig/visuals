@@ -1,7 +1,7 @@
 import { getPlaiceholder } from "plaiceholder";
-import type { Photo, ImagesRes } from "@/models/image";
+import type { Video, FilmRes } from "@/models/video";
 
-async function getBase64Photos(imageUrl: string) {
+async function getBase64Video(imageUrl: string) {
   try {
     const response = await fetch(imageUrl);
     if (!response.ok) {
@@ -18,22 +18,20 @@ async function getBase64Photos(imageUrl: string) {
   }
 }
 
-export default async function blurredImageURL(
-  images: ImagesRes
-): Promise<Photo[]> {
+export default async function blurredVideoURL(film: FilmRes): Promise<Video[]> {
   //makes request in one go so it doesnt wait for each one
-  const getBase64Promises = images.photos.map((photo) =>
-    getBase64Photos(photo.src.large)
+  const getBase64Promises = film.videos.map((video) =>
+    getBase64Video(video.image)
   );
 
   //resolve all requests
   const base64Res = await Promise.all(getBase64Promises);
 
-  //maps through photos and assigns the blurredDataURL which was optional to a base64Res
-  const photoBlur: Photo[] = images.photos.map((photo, index) => {
-    photo.blurredDataUrl = base64Res[index];
-    return photo;
+  //maps through videos and assigns the blurredDataURL which was optional to a base64Res
+  const videoBlur: Video[] = film.videos.map((video, index) => {
+    video.blurredDataUrl = base64Res[index];
+    return video;
   });
 
-  return photoBlur;
+  return videoBlur;
 }
