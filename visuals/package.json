@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "envalid": "^8.0.0",
-    "next": "14.0.4",
+    "next": "^14.0.4",
     "plaiceholder": "^3.0.0",
     "react": "^18",
     "react-dom": "^18",
