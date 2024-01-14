@@ -1,13 +1,15 @@
 import type { ImagesRes } from "@/models/image";
+import type { FilmRes } from "@/models/video";
 
 function getPage(url: string) {
   const { searchParams } = new URL(url);
   return searchParams.get("page");
 }
 
-export default function getPrevNextPages(images: ImagesRes) {
+export default function getPrev(
+  images: ImagesRes | FilmRes | undefined
+) {
   let nextPage = images?.next_page ? getPage(images.next_page) : null;
-
   const prevPage = images?.prev_page ? getPage(images.prev_page) : null;
 
   const totalPages =

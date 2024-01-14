@@ -3,22 +3,24 @@ import { FilmRes } from "@/models/video";
 import VideoImageContainer from "./VideoImageConainter";
 import blurredVideoURL from "@/lib/getVideoBase";
 import SearchBar from "./SearchBar";
+import getPrev from "@/lib/getPrev";
+import PaginationVideos from "./PaginationVideos";
 
 type Props = {
   topic?: string | undefined;
   page?: string | undefined;
 };
 export default async function VideoGallery({ topic = "popular", page }: Props) {
-  let url = "https://api.pexels.com/videos/popular?per_page=10";
+  let url;
   if (topic === "popular" && page) {
     //browsing another page (not home)
-    url = `https://api.pexels.com/videos/popular?page=${page}`;
+    url = `https://api.pexels.com/videos/popular?page=${page}?per_page=80`;
   } else if (topic === "popular") {
-    url = "https://api.pexels.com/videos/popular";
+    url = "https://api.pexels.com/videos/popular?per_page=80";
   } else if (!page) {
-    url = `https://api.pexels.com/videos/search?query=${topic}`;
+    url = `https://api.pexels.com/videos/search?query=${topic}?per_page=80`;
   } else {
-    url = `https://api.pexels.com/videos/search?query=${topic}&page=${page}`;
+    url = `https://api.pexels.com/videos/search?query=${topic}&page=${page}?per_page=80`;
   }
   const film: FilmRes | undefined = await fetchVideos(url);
   if (!film || film.per_page === 0) {
@@ -29,8 +31,10 @@ export default async function VideoGallery({ topic = "popular", page }: Props) {
     );
   }
   const photosWithBlur = await blurredVideoURL(film);
+  const { prevPage, nextPage } = getPrev(film);
+  const footerProps = { topic, page, nextPage, prevPage };
   return (
-    <div className="max-w-6xl mx-auto">
+    <section className="max-w-6xl mx-auto">
       <div className="h-[25vh] flex items-center flex-col justify-center ">
         <div className="text-4xl font-medium tracking-wide text-center">
           <span>VIDEOS.</span>
@@ -42,11 +46,14 @@ export default async function VideoGallery({ topic = "popular", page }: Props) {
           <SearchBar />
         </div>
       </div>
-      <section className="px-1 my-3 grid grid-cols-gallery sm:auto-rows-[10.60px] max-w-6xl mx-auto">
+      <div className="px-1 my-3 grid grid-cols-gallery sm:auto-rows-[10.60px] max-w-6xl mx-auto">
         {photosWithBlur?.map((video) => (
-          <VideoImageContainer key={video.id} video={video} />
+          <>
+            <VideoImageContainer key={video.id} video={video} />
+          </>
         ))}
-      </section>
-    </div>
+      </div>
+      <PaginationVideos {...footerProps} />
+    </section>
   );
 }

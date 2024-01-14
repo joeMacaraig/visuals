@@ -7,7 +7,12 @@ type Props = {
   prevPage: string | null;
   nextPage: string | null;
 };
-export default function Pagination({ topic, page, prevPage, nextPage }: Props) {
+export default function PaginationImage({
+  topic,
+  page,
+  prevPage,
+  nextPage,
+}: Props) {
   if (!prevPage && !nextPage) return;
 
   const pageNums: number[] = [];
@@ -19,10 +24,10 @@ export default function Pagination({ topic, page, prevPage, nextPage }: Props) {
 
   const nextPageArea = nextPage ? (
     <Link
-      href={`/results/${topic}/${nextPage}`}
+      href={`/photos/${topic}/${nextPage}`}
       className={!prevPage ? " flex items-center" : ""}
     >
-      <div className="w-[40px] px-2 py-3 border mx-1 flex items-center">
+      <div className="w-[40px] px-2 py-3 border m-1 flex items-center hover:border hover:rounded hover:bg-blue-500 hover:text-white transition ease-in-out duration-500">
         {!prevPage ? "..." : null} <FaChevronRight />
       </div>
     </Link>
@@ -31,10 +36,10 @@ export default function Pagination({ topic, page, prevPage, nextPage }: Props) {
   const prevPageArea = prevPage ? (
     <>
       <Link
-        href={`/results/${topic}/${prevPage}`}
+        href={`/photos/${topic}/${prevPage}`}
         className={!nextPage ? "flex items-center" : ""}
       >
-        <div className="w-[40px] px-2 py-3 border mx-1 flex items-center">
+        <div className="w-[40px] px-2 py-3 border mx-2 flex items-center hover:border hover:rounded hover:bg-blue-500 hover:text-white transition ease-in-out duration-500">
           <FaChevronLeft /> {!nextPage ? "back" : null}
         </div>
       </Link>
@@ -50,8 +55,8 @@ export default function Pagination({ topic, page, prevPage, nextPage }: Props) {
         ) : (
           <Link
             key={i}
-            href={`/results/${topic}/${num}`}
-            className="w-[40px] px-3 py-2 border mx-1"
+            href={`/photos/${topic}/${num}`}
+            className="w-[40px] px-3 py-2 border mx-1 hover:border hover:rounded hover:bg-blue-500 hover:text-white transition ease-in-out duration-500"
           >
             {num}
           </Link>

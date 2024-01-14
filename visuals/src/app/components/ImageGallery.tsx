@@ -2,7 +2,7 @@ import fetchImages from "@/lib/fetchImages";
 import type { ImagesRes } from "@/models/image";
 import ImageContainer from "./ImageContainer";
 import getPrev from "@/lib/getPrev";
-import Pagination from "./Pagination";
+import PaginationImage from "./Pagination";
 import blurredImageURL from "@/lib/getBase";
 import SearchBar from "./SearchBar";
 
@@ -15,13 +15,13 @@ export default async function ImageGallery({ topic = "curated", page }: Props) {
   let url;
   if (topic === "curated" && page) {
     //browsing another page (not home)
-    url = `https://api.pexels.com/v1/curated?page=${page}`;
+    url = `https://api.pexels.com/v1/curated?page=${page}&per_page=40`;
   } else if (topic === "curated") {
-    url = "https://api.pexels.com/v1/curated";
+    url = "https://api.pexels.com/v1/curated?page=1&per_page=40";
   } else if (!page) {
     url = `https://api.pexels.com/v1/search?query=${topic}`;
   } else {
-    url = `https://api.pexels.com/v1/search?query=${topic}&page=${page}`;
+    url = `https://api.pexels.com/v1/search?query=${topic}&page=${page}&per_page=40`;
   }
   const images: ImagesRes | undefined = await fetchImages(url);
   if (!images || images.per_page === 0) {
@@ -37,7 +37,7 @@ export default async function ImageGallery({ topic = "curated", page }: Props) {
   const { prevPage, nextPage } = getPrev(images);
   const footerProps = { topic, page, nextPage, prevPage };
   return (
-    <div className="max-w-6xl mx-auto">
+    <section className="max-w-6xl mx-auto">
       <div className="h-[25vh] flex items-center flex-col justify-center ">
         <div className="text-4xl font-medium tracking-wide text-center">
           <span>IMAGES.</span>
@@ -49,12 +49,13 @@ export default async function ImageGallery({ topic = "curated", page }: Props) {
           <SearchBar />
         </div>
       </div>
-      <section className="px-1 my-3 grid grid-cols-gallery auto-rows-[10px] max-w-6xl mx-auto">
+      <div className="px-1 my-3 grid grid-cols-gallery auto-rows-[10px] max-w-6xl mx-auto">
+        <div></div>
         {photosWithBlur?.map((photo) => (
           <ImageContainer key={photo.id} photo={photo} />
         ))}
-      </section>
-      <Pagination {...footerProps} />
-    </div>
+      </div>
+      <PaginationImage {...footerProps} />
+    </section>
   );
 }

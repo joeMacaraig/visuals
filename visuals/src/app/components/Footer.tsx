@@ -8,7 +8,7 @@ import { TfiEmail } from "react-icons/tfi";
 
 export default function Footer() {
   return (
-    <div className="flex justify-center items-center flex-col p-4">
+    <div className="flex justify-center items-center flex-col">
       <div className="flex items-center justify-center w-full">
         <Link
           href="https://github.com/joeMacaraig"
