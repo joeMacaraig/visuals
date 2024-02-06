@@ -2,8 +2,8 @@ import Link from "next/link";
 export default function About() {
   return (
     <section className="max-w-7xl mx-auto flex flex-col items-center justify-center">
-      <div className="h-[40vh] flex items-center">
-        <div className="grid grid-cols-2 p-4">
+      <div className="h-full sm:h-[40vh] flex items-center">
+        <div className="flex flex-col items-center sm:grid sm:grid-cols-2 p-4">
           <div className="p-4">
             <h1 className="text-5xl font-bold tracking-wider">
               EVERYTHING YOU
@@ -24,10 +24,10 @@ export default function About() {
           </p>
         </div>
       </div>
-      <div className="flex flex-cols items-center jusitfy-center sm:grid sm:grid-cols-3 sm:gap-6">
-        <div>
-          <h2>Our Mission</h2>
-          <p>
+      <div className="h-full flex flex-col items-center jusitfy-center sm:grid sm:grid-cols-3 sm:gap-6 sm:place-items-start">
+        <div className="border p-8 shadow h-full">
+          <h2 className="text-xl font-bold mb-2">Our Mission</h2>
+          <p className="text-justify leading-snug">
             Our mission is to curate a diverse collection of high-quality visual
             content, showcasing the brilliance of artists and videographers from
             around the world. We strive to create a platform that celebrates
@@ -35,9 +35,9 @@ export default function About() {
             visual arts.
           </p>
         </div>
-        <div>
-          <h2>What Sets Us Apart</h2>
-          <p>
+        <div className="border p-8 shadow h-full">
+          <h2 className="text-xl font-bold mb-2">What Sets Us Apart</h2>
+          <p className="text-justify leading-snug">
             Visuals stands out by leveraging the Pexels API, a rich source of
             free stock photos and videos. This partnership allows us to offer an
             extensive and ever-growing library of visuals to our users. With the
@@ -46,9 +46,9 @@ export default function About() {
             and diverse visual content.
           </p>
         </div>
-        <div>
-          <h2>Explore, Create, Inspire</h2>
-          <p>
+        <div className="border p-8 shadow h-full">
+          <h2 className="text-xl font-bold mb-2">Explore, Create, Inspire</h2>
+          <p className="text-justify leading-snug">
             Whether you're an artist looking to showcase your work or an
             enthusiast seeking inspiration, Visuals is your go-to destination.
             Explore our curated galleries and be inspired by the beauty of
