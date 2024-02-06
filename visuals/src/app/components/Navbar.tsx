@@ -4,9 +4,9 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-20 bg-opacity-75  backdrop-blur-2xl">
+    <header className="w-full sticky top-0 z-20 bg-opacity-75 backdrop-blur-lg backdrop-filter-none bg-white">
       <nav className="flex flex-col items-center justify-center px-4 py-3 mx-auto sm:flex-row sm:justify-between shadow">
-        <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight mb-2 text-blue-500">
+        <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight mb-2 text-blue-600">
           <Link href="/">Visuals.</Link>
         </h1>
         <div className="flex items-center gap-6 mr-2 font-medium">
