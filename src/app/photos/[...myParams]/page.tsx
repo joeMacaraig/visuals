@@ -1,4 +1,4 @@
-import VideoGallery from "@/app/components/VideoGallery";
+import ImageGallery from "@/app/components/Images/ImageGallery";
 
 type Props = {
   params: {
@@ -7,15 +7,15 @@ type Props = {
 };
 
 export function generateMetadeta({ params: { myParams } }: Props) {
-  const topic = myParams?.[0] ?? "popular";
+  const topic = myParams?.[0] ?? "curated";
   const page = myParams?.[1] ?? "1";
   return {
-    title: `Visuals | searching for ${topic} videos - pg.${page}`,
+    title: `Visuals | searching for ${topic} - Page ${page}`,
   };
 }
 
 export default function SearchRes({ params: { myParams } }: Props) {
-  const topic = myParams?.[0] ?? "popular";
+  const topic = myParams?.[0] ?? "curated";
   const page = myParams?.[1] ?? "1";
-  return <VideoGallery topic={topic} page={page} />;
+  return <ImageGallery topic={topic} page={page} />;
 }

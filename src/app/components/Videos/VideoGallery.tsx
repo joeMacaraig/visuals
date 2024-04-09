@@ -2,9 +2,9 @@ import fetchVideos from "@/lib/fetchVideos";
 import { FilmRes } from "@/models/video";
 import VideoImageContainer from "./VideoImageConainter";
 import blurredVideoURL from "@/lib/getVideoBase";
-import SearchBar from "./SearchBar";
+import SearchBar from "../SearchBar";
 import getPrev from "@/lib/getPrev";
-import PaginationVideos from "./PaginationVideos";
+import PaginationVideos from "../PaginationVideos";
 
 type Props = {
   topic?: string | undefined;
