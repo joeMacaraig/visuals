@@ -1,14 +1,17 @@
-import type { ImagesRes } from "@/models/image";
-import { ImageWithPhotosSchema } from "@/models/image";
 import { env } from "./env";
+import { ImagesRes } from "@/models/image";
+import { ImageWithPhotosSchema } from "@/models/image";
 
-export default async function fetchImages(
-  url: string
+export default async function fetchPhotos(
+  page: number
 ): Promise<ImagesRes | undefined> {
   try {
-    const response = await fetch(url, {
-      headers: { Authorization: env.PEXELS_API_KEY },
-    });
+    const response = await fetch(
+      `https://api.pexels.com/v1/curated?page=${page}&per_page=40`,
+      {
+        headers: { Authorization: env.PEXELS_API_KEY },
+      }
+    );
 
     if (!response.ok) throw new Error("FETCH IMAGES ERROR!\n");
 

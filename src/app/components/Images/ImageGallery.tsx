@@ -2,9 +2,10 @@ import fetchImages from "@/lib/fetchImages";
 import type { ImagesRes } from "@/models/image";
 import ImageContainer from "./ImageContainer";
 import getPrev from "@/lib/getPrev";
-import PaginationImage from "./Pagination";
+import PaginationImage from "../Pagination";
 import blurredImageURL from "@/lib/getBase";
-import SearchBar from "./SearchBar";
+import SearchBar from "../SearchBar";
+import Loading from "../Loading";
 
 type Props = {
   topic?: string | undefined;
@@ -13,8 +14,8 @@ type Props = {
 
 export default async function ImageGallery({ topic = "curated", page }: Props) {
   let url;
+  //browsing another page (not home)
   if (topic === "curated" && page) {
-    //browsing another page (not home)
     url = `https://api.pexels.com/v1/curated?page=${page}&per_page=40`;
   } else if (topic === "curated") {
     url = "https://api.pexels.com/v1/curated?page=1&per_page=40";
@@ -33,9 +34,11 @@ export default async function ImageGallery({ topic = "curated", page }: Props) {
   }
 
   const photosWithBlur = await blurredImageURL(images);
+  console.log(photosWithBlur);
 
   const { prevPage, nextPage } = getPrev(images);
   const footerProps = { topic, page, nextPage, prevPage };
+
   return (
     <section className="max-w-6xl mx-auto">
       <div className="h-[25vh] flex items-center flex-col justify-center ">
@@ -50,7 +53,7 @@ export default async function ImageGallery({ topic = "curated", page }: Props) {
         </div>
       </div>
       <div className="px-1 my-3 grid grid-cols-gallery auto-rows-[10px] max-w-6xl mx-auto">
-        <div></div>
+        {/* <Loading /> */}
         {photosWithBlur?.map((photo) => (
           <ImageContainer key={photo.id} photo={photo} />
         ))}
