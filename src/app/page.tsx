@@ -1,9 +1,6 @@
-import Landing from "./components/Landing";
-
-export default function Home() {
+export default async function Home() {
   return (
-    <>
-      <Landing />
-    </>
+    <main className="flex h-full flex-col justify-center items-center w-full">
+    </main>
   );
 }
